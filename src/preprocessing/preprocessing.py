@@ -5,8 +5,8 @@ import sys
 sys.path.append('..')   # add parent folder
 
 # load data
-df_books = pd.read_csv("data/raw/books_data.csv", nrows=10000)
-df_reviews = pd.read_csv("data/raw/Books_rating.csv", nrows=10000)
+df_books = pd.read_csv("data/raw/books_data.csv", nrows=100000)
+df_reviews = pd.read_csv("data/raw/Books_rating.csv", nrows=100000)
 
 # -----------------------------
 # NLP PREPROCESSING
