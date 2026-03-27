@@ -26,7 +26,7 @@ def _extract_genres(cat: str) -> list[str]:
     return parts
 
 
-df = load_data(nrows=10000)
+df = load_data(nrows=30000)
 
 # build genre list for filters
 all_genres = sorted({g for cats in df["categories"].dropna().unique() for g in _extract_genres(cats)})
@@ -267,7 +267,7 @@ st.subheader("🧠 Semantic search (experimental)")
 @st.cache_data(show_spinner=False)
 def build_semantic_index(df: pd.DataFrame):
     model_local = SentenceTransformer("all-MiniLM-L6-v2")
-    embeddings = np.vstack(df["clean_review"].apply(lambda x: model_local.encode(x)).values)
+    embeddings = np.vstack(df["clean_review"].fillna("").apply(lambda x: model_local.encode(x)).values)
     idx = faiss.IndexFlatL2(embeddings.shape[1])
     idx.add(embeddings)
     return model_local, idx
